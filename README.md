@@ -62,3 +62,18 @@ Shows detailed information about the container named "mysql".
 
 Displays live performance statistics for running containers.
 - docker container stats
+
+____________
+
+Runs the Nginx container named "proxy" interactively, opening a bash shell.
+- docker container run -it --name proxy nginx bash
+
+Runs an Ubuntu container named "ubuntu" interactively, opening a bash shell.
+- docker container run -it --name ubuntu ubuntu
+
+Starts the "ubuntu" container and attaches the terminal interactively.
+- docker container start -ai ubuntu
+
+Executes an interactive bash shell inside the running "mysql" container.
+- docker container exec -it mysql bash
+_____________
