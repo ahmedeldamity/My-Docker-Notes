@@ -30,3 +30,35 @@ Runs the Nginx container in detached mode with a custom name "webhost" and maps 
 
 Runs a MySQL container in detached mode, mapping port 3306, and generating a random root password.
 - docker container run -d -p 3306:3306 --name db -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+
+_______________
+
+Starts a previously stopped container named "mongo".
+- docker start mongo
+
+Stops the running container with ID "690".
+- docker container stop 690
+
+Lists all currently running containers.
+- docker container ls
+
+Lists all containers, both running and stopped.
+- docker container ls -a
+
+Displays the logs for the container named "webhost".
+- docker container logs webhost
+
+Shows the running processes inside the "webhost" container.
+- docker container top webhost
+
+Removes the containers with IDs "63f", "690", and "ode".
+- docker container rm 63f 690 ode
+
+Forcefully removes the container with ID "63f".
+- docker container rm -f 63f
+
+Shows detailed information about the container named "mysql".
+- docker container inspect mysql
+
+Displays live performance statistics for running containers.
+- docker container stats
