@@ -157,3 +157,41 @@ When a reply comes back, the main door knows which room (container) the letter b
 - Containers = Rooms in the building.
 - NAT = Main door with a return address.
 ______________
+
+🔍 `What is --net=host?`
+
+*When you run a container with the --net=host option, it tells Docker to skip creating a separate network namespace for the container. Instead, the container will share the host's network stack, meaning it will use the host's IP address and network interfaces directly. This can result in improved network performance but can also expose the host to security risks since the container has direct access to the host's network.*
+
+🔍 `Two Scenarios:`
+
+*Without `--net=host`:*
+
+- The guest house (container) has its own separate address.
+- If you want to talk from the guest house to the main house, you have to use the phone line (network communication).
+
+*With `--net=host`:*
+
+- The guest house doesn’t have its own separate address anymore.
+- Instead, it shares the main house’s address. It's like the guest house is gone, and the people (programs) in the guest house move directly into the main house.
+- Now, these programs don’t need to use the phone line (network connection) to talk; they can just walk into any room in the main house because they’re already inside.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
