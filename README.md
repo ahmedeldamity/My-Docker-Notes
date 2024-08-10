@@ -212,3 +212,44 @@ ________________
 - Calico
 - Flannel
 - Cilium
+
+_____________________
+
+🐳 `Docker Networks: CLI Management of Virtual Networks`
+
+*Displays the port mappings between the host and the `webhost` container.*
+```bash
+docker container port webhost
+```
+*Retrieves the IP address of the `webhost` container.*
+```bash
+docker container inspect --format '{{ .NetworkSettings.IPAddress }}' webhost
+```
+*Lists all Docker networks on the system.*
+```bash
+docker network ls
+```
+*Shows detailed information about the default `bridge` network.*
+```bash
+docker network inspect bridge
+```
+*Creates a new Docker network named `my_app_net`.*
+```bash
+docker network create my_app_net
+```
+*Runs a `new nginx` container named `new_nginx` on the `my_app_net` network in detached mode.*
+```bash
+docker container run -d --name new_nginx --network my_app_net nginx
+```
+*Provides detailed information about the `my_app_net` network.*
+```bash
+docker network inspect my_app_net
+```
+*Connects the `webhost` container to the `my_app_net` network.*
+```bash
+docker network connect my_app_net webhost
+```
+*Disconnects the `webhost` container to the `my_app_net` network.*
+```bash
+docker container disconnect my_app_net webhost
+```
