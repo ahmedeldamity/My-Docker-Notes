@@ -253,3 +253,45 @@ docker network connect my_app_net webhost
 ```bash
 docker container disconnect my_app_net webhost
 ```
+*Executes the `ping` command inside the `new_nginx` container to test network connectivity to a container named `my_nginx`.*
+```bash
+docker container exec -it new_nginx ping my_nginx
+```
+
+_____________________
+
+🐳 `Docker Networks: DNS and How Containers Find Each Other`
+
+*Creates a new Docker network named `dude`.*
+```bash
+docker network create dude
+```
+**NOW I Run Two Containers With The Same Alias Name And Will Explain How DNS Dealing With It.**
+
+**The First:**
+
+*Runs an `elasticsearch` container with the alias `search` on the `dude` network in detached mode.*
+```bash
+docker container run -d --net dude --net-alias search elasticsearch:2
+```
+**The Second:**
+
+*Runs an `elasticsearch` container with the alias `search` on the `dude` network in detached mode.*
+```bash
+docker container run -d --net dude --net-alias search elasticsearch:2
+```
+**So When We Search on On Alias Name `Search` It Will Bting all Exist**
+
+*Runs an `alpine` container to perform a DNS lookup for the alias `search` on the `dude` network, then removes the container after the command completes.*
+```bash
+docker container run --rm --net dude alpine nslookup search
+```
+
+**But It Exist Another Way (DNS Round-Robin)**
+
+*DNS Round-Robin: This means that when you request search, Docker’s internal DNS service will resolve the alias to one of the IP addresses of the containers with that alias, essentially picking one of them randomly.*
+
+*Runs a `centos` container to make a silent HTTP request to search:9200 on the `dude` network, then removes the container after the command completes.*
+```bash
+docker container run --rm --net dude centos curl -s search:9200
+```
