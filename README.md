@@ -175,23 +175,40 @@ ______________
 - Instead, it shares the main house’s address. It's like the guest house is gone, and the people (programs) in the guest house move directly into the main house.
 - Now, these programs don’t need to use the phone line (network connection) to talk; they can just walk into any room in the main house because they’re already inside.
 
+________________
 
+🔍 `What is the Docker Network Drivers`
 
+*Docker network drivers are mechanisms that allow Docker containers to communicate with each other and the outside world. When you create a Docker network, you choose a driver to define how the network operates and how the containers connected to it interact.*
 
+🔍 `Built-In Docker Network Drivers`
 
+*1- Bridge Network Driver (Default)*
+-  Containers on the same bridge network can communicate with each other, but they're isolated from containers on different networks.
 
+*2- Host Network Driver*
+- When you use the host network driver, the container uses the Docker host’s network stack directly.
+- The container uses the host’s IP address directly instead of using Docker's NAT.
+- No network isolation; containers share the host's IP address and ports.
+- Useful for scenarios where performance is critical and network isolation is not needed.
 
+*3. Overlay Network Driver*
+-  Used to connect containers across multiple Docker hosts (machines), typically in a Docker Swarm or Kubernetes cluster.
+-  Allows containers on different hosts to communicate as if they were on the same network.
+-  deal for distributed applications, microservices, and multi-host deployments.
 
+*4. None Network Driver*
+- it has no network interfaces.
+- Completely isolates the container from any network.
+- If you’re running a container that performs calculations and doesn’t need any network access, using the none driver ensures it’s fully isolated.
 
+🔍 `3rd Party Docker Network Drivers`
 
+*are additional tools created by other developers or companies to enhance Docker’s networking features. Docker itself comes with a few basic network drivers, but third-party drivers add more options for how containers can connect to each other and the outside world.*
 
+*Examples of Third-Party Docker Network Drivers*
 
-
-
-
-
-
-
-
-
-
+- Weave
+- Calico
+- Flannel
+- Cilium
