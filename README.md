@@ -311,3 +311,19 @@ Layers in Docker: When you create a Docker image, each step in the recipe (like 
 These steps are like commands in a Dockerfile (FROM, RUN, COPY), and each creates a new layer. Each layer builds on the one below it.
 
 Why layers Important: If you want to change the lettuce, you don’t need to rebuild the whole sandwich. You only change the lettuce layer. This makes updating images faster because Docker only rebuilds the layers that changed.
+
+___________________________
+
+🐳 `Union File System (UnionFS)`
+
+**UnionFS is like a magic trick where all the sandwich layers (ingredients) look like one single sandwich when you eat it. Even though you added ingredients separately, UnionFS combines them so that you only see the final sandwich.**
+
+How it works:
+
+- The layers are stacked, but you interact with them as one single unit.
+- When you create a container from an image, Docker uses UnionFS to combine all the image layers (the pre-made parts) with the new writable layer into a single, unified file system.
+- Even though these layers are separate, UnionFS makes them look like one complete system, so when you interact with the container, you don't have to worry about the layers being separate.
+- Read-Only Layers: The original image layers are read-only, meaning they can’t be changed. UnionFS keeps them as they are but makes sure they’re accessible as part of the container’s file system.
+- Writable Layer: UnionFS adds a writable layer on top of the read-only layers. This is where any changes you make while the container is running (like installing new software or creating files) are stored.
+- If you modify a file that exists in one of the read-only layers, UnionFS doesn’t actually change that original layer. Instead, it makes a copy of the file in the writable layer and then applies your changes there. This is called Copy-on-Write.
+- This process ensures that the original image layers remain untouched, and only the changes you make are stored in the writable layer.
