@@ -295,3 +295,19 @@ docker container run --rm --net dude alpine nslookup search
 ```bash
 docker container run --rm --net dude centos curl -s search:9200
 ```
+
+___________________________
+
+🐳 `Image Layers:`
+
+**Imagine building a sandwich 🥪. Each ingredient you add (like bread, lettuce, cheese, tomato) is like a layer in a Docker image.**
+
+Layers in Docker: When you create a Docker image, each step in the recipe (like adding lettuce, then cheese) adds a new layer. For example:
+
+- Step 1: You add a base (like bread).
+- Step 2: You add cheese on top of the bread.
+- Step 3: You add lettuce on top of the cheese.
+
+These steps are like commands in a Dockerfile (FROM, RUN, COPY), and each creates a new layer. Each layer builds on the one below it.
+
+Why layers Important: If you want to change the lettuce, you don’t need to rebuild the whole sandwich. You only change the lettuce layer. This makes updating images faster because Docker only rebuilds the layers that changed.
