@@ -327,3 +327,25 @@ How it works:
 - Writable Layer: UnionFS adds a writable layer on top of the read-only layers. This is where any changes you make while the container is running (like installing new software or creating files) are stored.
 - If you modify a file that exists in one of the read-only layers, UnionFS doesn’t actually change that original layer. Instead, it makes a copy of the file in the writable layer and then applies your changes there. This is called Copy-on-Write.
 - This process ensures that the original image layers remain untouched, and only the changes you make are stored in the writable layer.
+
+_______________________
+
+🐳 `When you create, run and delete a Docker container`
+
+**1. Container Creation:**
+
+*Think of creating a container as making a sandwich from a recipe (Docker image) you already have.*
+
+- Base Image Layers: Docker starts with the base image layers (the sandwich ingredients), which are read-only. This means you can look at and use these layers, but you can't change them. They're like the pre-made parts of the sandwich.
+- New Writable Layer: On top of these read-only layers, Docker adds a new, writable layer (container layer). This layer is where all your changes go, like adding ketchup or mustard to your sandwich. If you make changes, they only affect this top layer, not the original ingredients.
+
+**2. Running the Container:**
+
+*When the container runs, it uses the combined layers as its file system:*
+
+- Reading Files: If you read a file (like tasting the sandwich), Docker checks from the top layer down. If the file is in the writable layer, it uses that one. If not, it looks in the lower read-only layers.
+- Writing Files: If you write or change a file (like adding or removing ingredients), it happens in the writable layer. The lower layers stay unchanged, which keeps the original image intact.
+
+**3. Deleting the Container:**
+
+- When you delete the container, Docker removes the writable layer. The base image layers remain untouched, so you can create a new container from the same image without losing anything.
